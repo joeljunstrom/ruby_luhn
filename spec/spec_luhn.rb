@@ -1,4 +1,3 @@
-require "benchmark"
 require 'helper'
 
 describe Luhn do
@@ -29,14 +28,4 @@ describe Luhn do
   it 'calculates the control digit' do
     Luhn.control_digit('111111111').must_equal 6
   end
-
-  if ENV["BENCH"] then
-    luhn = Luhn.generate(42)
-    bench_performance_linear "checksum_calculation", 0.9999 do |n|
-      100.times do
-        Luhn.valid? luhn
-      end
-    end
-  end
-
 end
