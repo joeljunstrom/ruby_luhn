@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_luhn (0.1.0)
+    luhn (0.1.1)
 
 GEM
   remote: http://rubygems.org/
@@ -16,7 +16,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  luhn!
   minitest (~> 2.6.0)
   rake
-  ruby_luhn!
   turn

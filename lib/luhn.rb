@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'enumerator'
 require 'luhn/extensions'
 
 module Luhn
@@ -7,11 +6,11 @@ module Luhn
 
   class << self
     def valid?(value)
-      self.checksum(value, 'verify') % 10 == 0
+      self.checksum(value, :odd) % 10 == 0
     end
 
     def control_digit(value)
-      sum = self.checksum(value, 'calculate')
+      sum = self.checksum(value, :even)
       (sum % 10 != 0) ? 10 - (sum % 10) : 0
     end
 
@@ -23,18 +22,18 @@ module Luhn
 
   protected
 
-    # TODO remove ruby 1.8.6 compliance and make it speedier,
-    # remove silly enums and just use mod % to check for odd / even
     def checksum(value, operation)
-      method = case operation
-        when 'verify' then :odd?
-        when 'calculate' then :even?
+      i = 0
+      value.reverse.split(//).inject(0) do |sum, c|
+        n = c.to_i
+        calc = if operation == :even
+          (i % 2 == 0) ? n * 2 : n
         else
-          raise ArgumentError.new("operation must equal verify or calculate")
+          (i % 2 != 0) ? n * 2 : n
         end
-      value.reverse.split(//).enum_for(:each_with_index).map do |n, i|
-        n.to_i * (i.send(method) ? 2 : 1)
-      end.to_s.split(//).inject(0) { |sum, n| sum += n.to_i }
+        i += 1
+        sum += calc <= 9 ? calc : (calc % 10) + 1
+      end
     end
   end
 
