@@ -5,6 +5,10 @@ describe Luhn::CivicNumber do
     Luhn::CivicNumber.new('3910304298').valid?.must_equal true
   end
 
+  it 'identifies if the civic number is invalid' do
+    Luhn::CivicNumber.new('3910304290').valid?.must_equal false
+  end
+
   it 'requires a length of 10 to be valid' do
     luhn_string = Luhn.generate(8, :prefix => '391030')
     Luhn::CivicNumber.new(luhn_string).valid?.must_equal false
@@ -13,10 +17,6 @@ describe Luhn::CivicNumber do
   it 'requires the civic number to be a valid date' do
     luhn_string = Luhn.generate(10, :prefix => '3999')
     Luhn::CivicNumber.new(luhn_string).valid?.must_equal false
-  end
-
-  it 'identifies if the civic number is invalid' do
-    Luhn::CivicNumber.new('3910304290').valid?.must_equal false
   end
 
   it 'calculates the control digit for a valid civic number' do
