@@ -1,4 +1,32 @@
-== Luhn implementation in ruby for Swedish civic numbers
+= Ruby class for handling basic Luhn number generation and verification
+
+Includes a class to handle Swedish civic numbers (Personnummer)
+That interface supports checking validity (length, valid date and satisfies luhn),
+returning the sex, the control digit and generating random civic numbers.
+
+== Install
+
+  $ gem install luhn
+
+== Usage:
+
+=== Basic Luhn
+
+  Luhn.valid?('0465827879483596') # true
+  Luhn.control_digit('046582787948359') # 6
+  Luhn.generate(n) # returns a random number of n length that satisfies luhn
+
+
+=== Swedish civic numbers
+
+  civic_number = Luhn::CivicNumber.new('19391030-3183')
+  civic_number = '391030-3183'.as_civic_number
+  civic_number = 3910303183.as_civic_number
+
+  civic_number.valid? # true
+  civic_number.sex    # 'male'
+  civic_number.male?  # true
+  civic_number.control_digit # 3
 
 == About the Luhn algorithm (from http://en.wikipedia.org/wiki/Luhn_formula)
 
@@ -8,3 +36,7 @@ identification numbers, such as credit card numbers, IMEI numbers,
 National Provider Identifier numbers in US and Canadian Social Insurance Numbers.
 It was created by IBM scientist Hans Peter Luhn and described in U.S. Patent
 No. 2,950,048, filed on January 6, 1954, and granted on August 23, 1960.
+
+== Copyright
+
+Copyright (c) 2010 Joel Junström. See LICENSE for details.
