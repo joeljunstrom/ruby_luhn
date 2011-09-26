@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
+require 'bundler'
 require File.expand_path('../lib/luhn/version', __FILE__)
+
+Bundler::GemHelper.install_tasks
 
 namespace :test do
   Rake::TestTask.new(:all) do |test|
