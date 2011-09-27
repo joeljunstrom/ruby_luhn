@@ -24,15 +24,12 @@ module Luhn
 
     def checksum(value, operation)
       i = 0
-      value.reverse.split(//).inject(0) do |sum, c|
+      compare_method = (operation == :even) ? :== : :>
+      value.reverse.split('').inject(0) do |sum, c|
         n = c.to_i
-        calc = if operation == :even
-          (i % 2 == 0) ? n * 2 : n
-        else
-          (i % 2 != 0) ? n * 2 : n
-        end
+        weight = (i % 2).send(compare_method, 0) ? n * 2 : n
         i += 1
-        sum += calc <= 9 ? calc : (calc % 10) + 1
+        sum += weight < 10 ? weight : weight - 9
       end
     end
   end
