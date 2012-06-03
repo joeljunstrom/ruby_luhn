@@ -1,0 +1,34 @@
+Feature: calculate luhn check digit
+
+  In order to get the valid IMEI numbers
+  As a user
+  I want to calculate the luhn check digit
+
+  Scenario: calculate check digit for one number
+    When I run `ruby_luhn calculate 35431604559642`
+    Then the output should contain "> 354316045596428"
+    
+  Scenario: calculate check digit for multiple numbers
+    When I run `ruby_luhn calculate` interactively
+    And I type "35431604559642"
+    And I type "35431604559639"
+    And I type "35431604559620"
+    And I type "exit"
+    Then the output should contain "> 354316045596428"
+    Then the output should contain "> 354316045596394"
+    Then the output should contain "> 354316045596204"
+    
+  Scenario: reject invalid input
+    When I run `ruby_luhn calculate 3543160d559642`
+    Then the output should contain "> 3543160d559642 is not a valid number"
+
+  Scenario: reject invalid input for multiple numbers
+    When I run `ruby_luhn calculate` interactively
+    And I type "35431604559642"
+    And I type "3543160d59e639"
+    And I type "35431604559620"
+    And I type "exit"
+    Then the output should contain "> 354316045596428"
+    Then the output should contain "> 3543160d59e639 is not a valid number"
+    Then the output should contain "> 354316045596204"
+
