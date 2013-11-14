@@ -30,6 +30,18 @@ returning the sex, the control digit and generating random civic numbers.
   '391030-3183'.civic_number? # true
   3910303183.civic_number?    # true
 
+== Luhn Mod N (from http://en.wikipedia.org/wiki/Luhn_mod_N_algorithm)
+
+The Luhn mod N algorithm is an extension to the Luhn algorithm that allows it to
+work with sequences of non-numeric characters. This can be useful when a check digit
+is required to validate an identification string composed of letters, a combination
+of letters and digits or even any arbitrary set of characters.
+
+  luhnModN = Luhn::LuhnModN.new('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+  luhnModN.generate('ABC') # 'ABCV'
+  luhnModN.valid?('ABDV') # true
+  luhnModN.check_character('ABC') # 'V'
+
 == About the Luhn algorithm (from http://en.wikipedia.org/wiki/Luhn_formula)
 
 The Luhn algorithm or Luhn formula, also known as the "modulus 10" or "mod 10"
