@@ -1,5 +1,7 @@
 = Ruby class for handling basic Luhn number generation and verification
 
+{<img src="https://travis-ci.org/abletech/ruby_luhn.png" />}[https://travis-ci.org/abletech/ruby_luhn]
+
 Includes a class to handle Swedish civic numbers (Personnummer)
 That interface supports checking validity (length, valid date and satisfies luhn),
 returning the sex, the control digit and generating random civic numbers.
