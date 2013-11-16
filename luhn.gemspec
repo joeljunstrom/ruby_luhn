@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.homepage     = 'http://github.com/joeljunstrom/ruby_luhn'
   s.summary      = 'A small implementation of the Luhn algorithm.'
   s.require_path = 'lib'
-  s.authors      = ['Joel Junström']
-  s.email        = ['joel.junstrom@gmail.com']
+  s.authors      = ['Joel Junström', 'Nigel Ramsay']
+  s.email        = ['joel.junstrom@gmail.com', 'nigel.ramsay@abletech.co.nz']
   s.version      = Luhn::Version
   s.platform     = Gem::Platform::RUBY
   s.files        = Dir.glob("{lib,spec}/**/*") + %w[LICENSE README.rdoc]

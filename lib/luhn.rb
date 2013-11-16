@@ -3,6 +3,7 @@ require 'luhn/extensions'
 
 module Luhn
   autoload :CivicNumber, 'luhn/civic_number'
+  autoload :LuhnModN, 'luhn/luhn_mod_n'
 
   class << self
     def valid?(value)

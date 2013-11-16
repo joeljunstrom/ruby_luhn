@@ -1,5 +1,7 @@
 = Ruby class for handling basic Luhn number generation and verification
 
+{<img src="https://travis-ci.org/AbleTech/ruby_luhn.png" />}[https://travis-ci.org/AbleTech/ruby_luhn]
+
 Includes a class to handle Swedish civic numbers (Personnummer)
 That interface supports checking validity (length, valid date and satisfies luhn),
 returning the sex, the control digit and generating random civic numbers.
@@ -29,6 +31,18 @@ returning the sex, the control digit and generating random civic numbers.
 
   '391030-3183'.civic_number? # true
   3910303183.civic_number?    # true
+
+=== Luhn Mod N (from http://en.wikipedia.org/wiki/Luhn_mod_N_algorithm)
+
+The Luhn mod N algorithm is an extension to the Luhn algorithm that allows it to
+work with sequences of a variety of characters. This can be useful when a check digit
+is required to validate an identification string composed of letters, a combination
+of letters and digits or even any arbitrary set of characters.
+
+  luhnModN = Luhn::LuhnModN.new('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+  luhnModN.generate('ABC') # 'ABCV'
+  luhnModN.valid?('ABCV') # true
+  luhnModN.check_character('ABC') # 'V'
 
 == About the Luhn algorithm (from http://en.wikipedia.org/wiki/Luhn_formula)
 
