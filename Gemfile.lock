@@ -4,7 +4,7 @@ PATH
     luhn (0.1.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     ansi (1.3.0)
     minitest (2.6.0)
