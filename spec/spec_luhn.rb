@@ -9,6 +9,10 @@ describe Luhn do
     Luhn.valid?('1111111111').must_equal false
   end
 
+  it 'requires numbers' do
+    Luhn.valid?('frefre').must_equal false
+  end
+
   it 'generates a number string that satisfies luhn' do
     luhn_string = Luhn.generate(rand(32)+1)
     Luhn.valid?(luhn_string).must_equal true
