@@ -40,6 +40,10 @@ module Luhn
       })
     end
 
+    def formatted
+      to_s.insert(civic_number.length - 4, "-")
+    end
+
     def to_s
       civic_number
     end
