@@ -1,9 +1,7 @@
 # encoding: UTF-8
-require 'luhn/extensions'
+require "luhn/extensions"
 
 module Luhn
-  autoload :CivicNumber, 'luhn/civic_number'
-
   class << self
     def valid?(value)
       self.checksum(value, :odd) % 10 == 0
@@ -33,5 +31,6 @@ module Luhn
       end
     end
   end
-
 end
+
+require "luhn/civic_number"
