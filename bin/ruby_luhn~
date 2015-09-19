@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'luhn'
+require 'luhn/cli'
+CLI.start
+
+
