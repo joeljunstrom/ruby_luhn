@@ -2,14 +2,14 @@
 require 'ostruct'
 module Luhn
   class CivicNumber
-    attr_reader :civic_number
+    attr_reader :value
 
-    def initialize(string)
-      @civic_number = cleanup_string(string.to_s)
+    def initialize string
+      self.value = string
     end
 
     def valid?
-      @valid ||= civic_number.length == 10 && valid_date? && Luhn.valid?(civic_number)
+      @valid ||= value.length == 10 && valid_date? && Luhn.valid?(value)
     end
 
     def valid_date?
@@ -17,11 +17,11 @@ module Luhn
     end
 
     def control_digit
-      @control_digit ||= Luhn.control_digit(civic_number[0...9])
+      @control_digit ||= Luhn.control_digit(value[0...9])
     end
 
     def sex
-      @sex ||= valid? ? (civic_number[8...9].to_i.even? ? 'female' : 'male') : 'unknown'
+      valid? ? (value[8...9].to_i.even? ? 'female' : 'male') : 'unknown'
     end
 
     def female?
@@ -33,34 +33,38 @@ module Luhn
     end
 
     def birth_date
-      @date ||= OpenStruct.new({
-        :year  => civic_number[0...2].to_i,
-        :month => civic_number[2...4].to_i,
-        :day   => civic_number[4...6].to_i
+      OpenStruct.new({
+        :year  => value[0...2].to_i,
+        :month => value[2...4].to_i,
+        :day   => value[4...6].to_i
       })
     end
 
     def formatted
-      to_s.insert(civic_number.length - 4, "-")
+      return value if value.length < 10
+
+      value.insert(value.length - 4, "-")
     end
 
     def to_s
-      civic_number
+      value
     end
 
-    class << self
-      def generate
-        date = Time.local(Time.now.year - rand(100) - 1, rand(12) + 1, rand(31) + 1)
-        Luhn.generate(10, :prefix => date.strftime("%y%m%d"))
-      end
+    # For backwards compability
+    def civic_number
+      value
     end
 
-  private
-
-    def cleanup_string(string)
-      string.gsub!(/\D/, '')
-      string.length == 12 ? string[2...12] : string
+    def self.generate
+      date = Time.local(Time.now.year - rand(100) - 1, rand(12) + 1, rand(31) + 1)
+      Luhn.generate(10, :prefix => date.strftime("%y%m%d"))
     end
 
+    private
+
+    def value= string
+      val = string.to_s.gsub(/\D/, '')
+      @value = val.length == 12 ? val[2...12] : val
+    end
   end
 end

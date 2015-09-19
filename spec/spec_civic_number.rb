@@ -46,10 +46,18 @@ describe Luhn::CivicNumber do
     civic_number.birth_date.day.must_equal 1
   end
 
-  it "formats the civic number" do
-    civic_number = Luhn::CivicNumber.new('3001018194')
+  describe "#formatted" do
+    it "formats the civic number" do
+      civic_number = Luhn::CivicNumber.new('3001018194')
 
-    civic_number.formatted.must_equal "300101-8194"
+      civic_number.formatted.must_equal "300101-8194"
+    end
+
+    it "returns the origial if the civic number is to short" do
+      civic_number = Luhn::CivicNumber.new('300101819')
+
+      civic_number.formatted.must_equal "300101819"
+    end
   end
 
   it 'generates a valid random civic number' do
