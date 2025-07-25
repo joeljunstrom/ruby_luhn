@@ -12,5 +12,7 @@ Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.files        = Dir.glob("{lib,spec}/**/*") + %w[LICENSE README.rdoc]
 
+  s.required_ruby_version = '>= 3.2'
+
   s.add_development_dependency 'minitest', '~> 2.6.0'
 end
