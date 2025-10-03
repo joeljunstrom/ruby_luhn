@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ostruct'
 module Luhn
   class CivicNumber
     attr_reader :value
@@ -33,11 +32,11 @@ module Luhn
     end
 
     def birth_date
-      OpenStruct.new({
-        :year  => value[0...2].to_i,
-        :month => value[2...4].to_i,
-        :day   => value[4...6].to_i
-      })
+      Data.define(:year, :month, :day).new(
+        value[0...2].to_i,
+        value[2...4].to_i,
+        value[4...6].to_i
+      )
     end
 
     def formatted
