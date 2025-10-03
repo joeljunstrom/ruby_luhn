@@ -1,3 +1,3 @@
 module Luhn
-  Version = "1.0.3"
+  Version = "2.0.0"
 end
