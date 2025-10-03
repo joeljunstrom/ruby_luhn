@@ -12,5 +12,7 @@ Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.files        = Dir.glob("{lib,spec}/**/*") + %w[LICENSE README.rdoc]
 
+  s.add_dependency 'ostruct', '~> 0' if Gem.ruby_version >= Gem::Version.new("3.4.0")
+
   s.add_development_dependency 'minitest', '~> 2.6.0'
 end
