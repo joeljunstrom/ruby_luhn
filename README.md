@@ -37,7 +37,9 @@ civic_number.control_digit # 3
 3910303183.civic_number?    # true
 ```
 
-## About the Luhn algorithm (from http://en.wikipedia.org/wiki/Luhn_formula)
+## About the Luhn algorithm
+
+The following is an excerpt from [the Wikipedia article on the Luhn algorithm.](https://en.wikipedia.org/wiki/Luhn_algorithm)
 
 The Luhn algorithm or Luhn formula, also known as the "modulus 10" or "mod 10"
 algorithm, is a simple checksum formula used to validate a variety of
