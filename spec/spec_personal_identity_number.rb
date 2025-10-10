@@ -5,6 +5,8 @@ require "helper"
 describe Luhn::PersonalIdentityNumber do
   it "identifies if the personal identity number is valid" do
     Luhn::PersonalIdentityNumber.new("3910304298").valid?.must_equal true
+
+    Luhn::PersonalIdentityNumber.new("193910304298").valid?.must_equal true
   end
 
   it "identifies if the personal identity number is invalid" do

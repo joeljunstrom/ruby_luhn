@@ -53,11 +53,6 @@ module Luhn
       value
     end
 
-    # For backwards compability
-    def civic_number
-      value
-    end
-
     def self.generate
       date = Time.local(Time.now.year - rand(1..99), rand(1..12), rand(1..31))
       Luhn.generate(10, prefix: date.strftime("%y%m%d"))
