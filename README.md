@@ -1,9 +1,9 @@
 # Ruby class for handling basic Luhn number generation and verification
 
-Includes a class to handle Swedish civic numbers (Personnummer).
+Includes a class to handle Swedish personal identity numbers (Personnummer).
 
 The interface supports checking validity (length, valid date and satisfies luhn),
-returning the sex, the control digit, and generating random civic numbers.
+returning the sex, the control digit, and generating random identity numbers.
 
 ## Install
 
@@ -16,25 +16,19 @@ $ gem install luhn
 ### Basic Luhn
 
 ```ruby
-Luhn.valid?('0465827879483596')       # true
-Luhn.control_digit('046582787948359') # 6
+Luhn.valid?("0465827879483596")       # true
+Luhn.control_digit("046582787948359") # 6
 Luhn.generate(n)                      # returns a random number of n length that satisfies luhn
-
-'0465827879483596'.valid_luhn? # true
-0465827879483596.valid_luhn?   # true
 ```
 
-### Swedish civic numbers
+### Swedish personal identity numbers
 
 ```ruby
-civic_number = Luhn::CivicNumber.new('19391030-3183')
-civic_number.valid?        # true
-civic_number.sex           # 'male'
-civic_number.male?         # true
-civic_number.control_digit # 3
-
-'391030-3183'.civic_number? # true
-3910303183.civic_number?    # true
+number = Luhn::PersonalIdentityNumber.new("19391030-3183")
+number.valid?        # true
+number.sex           # "male"
+number.male?         # true
+number.control_digit # 3
 ```
 
 ## About the Luhn algorithm
