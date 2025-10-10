@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require "luhn/extensions"
 
 module Luhn
   def self.valid? value
