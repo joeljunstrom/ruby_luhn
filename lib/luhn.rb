@@ -55,4 +55,4 @@ module Luhn
   end
 end
 
-require "luhn/civic_number"
+require "luhn/personal_identity_number"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Luhn
-  class CivicNumber
+  class PersonalIdentityNumber
     attr_reader :value
 
     BirthDate = Data.define(:year, :month, :day)
