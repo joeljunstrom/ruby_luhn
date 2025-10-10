@@ -1,5 +1,4 @@
-# encoding: UTF-8
-require "luhn/extensions"
+# frozen_string_literal: true
 
 module Luhn
   def self.valid? value
@@ -22,10 +21,10 @@ module Luhn
     end
 
     def self.generate size, options = {}
-      generated = options[:prefix] || ''
+      generated = options[:prefix] || ""
       (size - generated.size - 1).times { |i| generated += rand(10).to_s }
 
-      generated + self.new(generated).control_digit.to_s
+      generated + new(generated).control_digit.to_s
     end
 
     def valid?
@@ -46,14 +45,14 @@ module Luhn
     def checksum(operation)
       i = 0
       compare_method = (operation == :even) ? :== : :>
-      self.number.reverse.split("").inject(0) do |sum, c|
+      number.reverse.chars.inject(0) do |sum, c|
         n = c.to_i
         weight = (i % 2).send(compare_method, 0) ? n * 2 : n
         i += 1
-        sum += weight < 10 ? weight : weight - 9
+        sum + ((weight < 10) ? weight : (weight - 9))
       end
     end
   end
 end
 
-require "luhn/civic_number"
+require "luhn/personal_identity_number"
